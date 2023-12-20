@@ -12,16 +12,15 @@
 
 @include('includes.nav')
 <div class="container">
-  <h2>Cars List</h2>
+  <h2>Trashed Cars List</h2>
   <table class="table table-hover">
     <thead>
     <tr>
         <th>Title</th>
         <th>Description</th>
         <th>Published</th>
-        <th>Show</th>
-        <th>Edit</th>
         <th>Delete</th>
+        <th>Restore</th>
     </tr>
     </thead>
 
@@ -31,9 +30,8 @@
         <td>{{$car->title}}</td>
         <td>{{$car->description}}</td>
         <td>{{$car->published ? 'yes':'no'}}</td>
-        <td><a href="showCar/{{ $car->id }}">Show</a></td>
-        <td><a href="updateCar/{{ $car->id }}">Edit</a></td>
-        <td><a href="deleteCar/{{ $car->id }}" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+        <td><a href="forceDelete/{{ $car->id }}" onclick="return confirm('Are you sure you want to delete?')">Force Delete</a></td>
+        <td><a href="restoreCar/{{ $car->id }}">Restore</a></td>
         <!-- Another method to transform 1 and 0 in published into yes and no -->
         <!-- <td>
             {{$car->published}}

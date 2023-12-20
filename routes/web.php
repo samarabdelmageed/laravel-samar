@@ -74,4 +74,18 @@ Route::get('control',[ExampleController::class,'show']);
 // Route::get('storeCar',[CarController::class,'store']);
 Route::get('createCar',[CarController::class,'create'])->name('createCar');
 Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
-Route::get('Cars',[CarController::class,'index']);
+Route::get('Cars',[CarController::class,'index'])->name('Cars');
+Route::get('updateCar/{id}',[CarController::class,'edit'])->name('updateCar');
+Route::put('update/{id}',[CarController::class,'update'])->name('update');
+Route::get('showCar/{id}',[CarController::class,'show'])->name('showCar');
+Route::get('deleteCar/{id}',[CarController::class,'destroy'])->name('delete');
+Route::get('trashed',[CarController::class,'trashed'])->name('trashed');
+Route::get('forceDelete/{id}',[CarController::class,'forceDelete'])->name('forceDelete');
+Route::get('restoreCar/{id}',[CarController::class,'restore'])->name('restoreCar');
+Route::get('test1',function(){
+    return view('test1');
+});
+Route::get('image',function(){
+    return view('image');
+});
+Route::post('imageUpload',[ExampleController::class,'upload'])->name('imageUpload');
