@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,3 +90,15 @@ Route::get('image',function(){
     return view('image');
 });
 Route::post('imageUpload',[ExampleController::class,'upload'])->name('imageUpload');
+Route::get('testHome',function(){
+    return view('testHome');
+})->name('testHome');
+Route::get('contact',function(){
+    return view('contact');
+})->name('contact');
+Route::get('404',function(){
+    return view('404');
+})->name('404');
+Route::get('createCat',[CategoryController::class,'create'])->name('createCat');
+Route::post('storeCat',[CategoryController::class,'store'])->name('storeCat');
+Route::get('Categories',[CategoryController::class,'index'])->name('Categories');
