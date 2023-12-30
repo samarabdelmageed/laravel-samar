@@ -8,6 +8,7 @@
 <body>
     <h1> Post Data </h1>
     <h2> Car Title: </h2> <h3 style="color:blue;"> {{$car->title}} </h3>
+    <h2> Category: </h2> <h3 style="color:blue;"> {{$car->get_cat_name()}} </h3>
     <h2> Created at: </h2> <h3 style="color:blue;">  {{$car->created_at}} </h3>
     <h2> Updated at: </h2> <h3 style="color:blue;"> {{$car->updated_at}} </h3>
     <h2> Description: </h2> <p style="color:blue;"> {{$car->description}} </p>
