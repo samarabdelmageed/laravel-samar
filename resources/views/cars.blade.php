@@ -32,7 +32,7 @@
         <td>{{$car->title}}</td>
         <td>{{$car->description}}</td>
         <td>{{$car->published ? 'yes':'no'}}</td>
-        <td>{{ $car->get_cat_name() }}</td>
+        <td>{{ $car->category->cat_name }}</td>
         <td><a href="showCar/{{ $car->id }}">Show</a></td>
         <td><a href="updateCar/{{ $car->id }}">Edit</a></td>
         <td><a href="deleteCar/{{ $car->id }}" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Add Car</title>
+  <title>Update Car</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -36,6 +36,18 @@
       <br>
       <img src="{{ asset('assets/images/'.$car->image) }}" alt="car" style="width:200px;">
       @error('image')
+        {{ $message }}
+      @enderror
+    </div>
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <select name="category_id" id="">
+        <option value="">Select Category</option>
+        @foreach($categories as $category)
+        <option value="{{$category->id}}" {{ $car->category->cat_name == $category->cat_name ? 'selected' : '' }}>{{$category->cat_name}}</option>
+        @endforeach
+      </select>
+      @error('category_id')
         {{ $message }}
       @enderror
     </div>

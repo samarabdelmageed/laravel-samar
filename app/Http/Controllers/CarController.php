@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Car;
+use App\Models\Category;
 use App\Traits\Common;
 
 class CarController extends Controller
 {
     use Common;
-    private $columns = ['title','description','published'];
+    private $columns = ['title','description','published','cat_name'];
     /**
      * Display a listing of the resource.
      */
@@ -25,7 +26,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('addcar');
+        $categories = Category::get();
+        return view('addCar',compact('categories'));
     }
 
     /**
@@ -44,10 +46,12 @@ class CarController extends Controller
         // $cars->save();
         // $data = $request->only($this->columns);
         $messages = $this->messages();
+        $categories = Category::get();
         $data = $request->validate([
             'title'=>'required|string|max:50',
             'description'=>'required|string',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'category_id'=>'required',
         ], $messages);
 
         $fileName = $this->uploadFile($request->image, 'assets/images');    
@@ -74,7 +78,8 @@ class CarController extends Controller
     public function edit(string $id)
     {
         $car = Car::findOrFail($id);
-        return view('updateCar',compact('car'));
+        $categories = Category::get();
+        return view('updateCar',compact('car','categories'));
     }
 
     /**
@@ -83,10 +88,12 @@ class CarController extends Controller
     public function update(Request $request, string $id)
     {
         $messages = $this->messages();
+        $categories = Category::get();
         $data = $request->validate([
              'title'=>'required|string|max:50',
              'description'=> 'required|string',
              'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+             'category_id'=>'required'
             ], $messages);
 
             if($request->hasFile('image')){
@@ -142,7 +149,7 @@ class CarController extends Controller
                 'description.required'=> 'should be text',
                 'image.required'=> 'Please be sure to select an image',
                 'image.mimes'=> 'Incorrect image type',
-                'image.max'=> 'Max file size is exceeded',                
+                'image.max'=> 'Max file size is exceeded',               
                 ];
     }
 }
