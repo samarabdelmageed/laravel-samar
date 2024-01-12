@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CategoryController;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,7 +76,7 @@ Route::get('control',[ExampleController::class,'show']);
 // Routes for the car table
 // store data into car table
 // Route::get('storeCar',[CarController::class,'store']);
-Route::get('createCar',[CarController::class,'create'])->name('createCar');
+Route::get('createCar',[CarController::class,'create'])->middleware('verified')->name('createCar');
 Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
 Route::get('Cars',[CarController::class,'index'])->name('Cars');
 Route::get('updateCar/{id}',[CarController::class,'edit'])->name('updateCar');
@@ -93,12 +96,20 @@ Route::post('imageUpload',[ExampleController::class,'upload'])->name('imageUploa
 Route::get('testHome',function(){
     return view('testHome');
 })->name('testHome');
-Route::get('contact',function(){
-    return view('contact');
-})->name('contact');
 Route::get('404',function(){
     return view('404');
 })->name('404');
 Route::get('createCat',[CategoryController::class,'create'])->name('createCat');
 Route::post('storeCat',[CategoryController::class,'store'])->name('storeCat');
 Route::get('Categories',[CategoryController::class,'index'])->name('Categories');
+
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('testSession',[ExampleController::class,'createSession'])->name('createSession');
+
+// sending emails from contact form
+
+Route::get('contact',[ExampleController::class,'contact'])->name('contact');
+Route::post('contact/sendMail',[ExampleController::class,'sendMail'])->name('sendMail');
